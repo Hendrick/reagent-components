@@ -66,6 +66,21 @@ It takes 4 parameters:
 
 `validate` runs all of the validations against `object-atom`, updates the validation errors in `error-atom`, and prevents the form from submitting if any validation errors are found.
 
+### Extras
+
+Included are a few additional items that may prove useful and reusable. Among them are some common validation messages and regexes for testing common patterns. These can be used within your validation map:
+
+```
+(ns example.form
+  (:require [bouncer.validators :as v]
+            [hendrick.validations :as hv]))
+
+(def object-validator
+  {:name  [v/required :message hv/required-message]
+   :phone [v/matches  hv/phone-regex
+                      :message hv/phone-message]})
+```
+
 ## General Tips
 
 It is strongly recommended that rather than calling these functions directly, you wrap them in functions local to your project and/or form to simplify the process of sending similar parameters for similar uses.
